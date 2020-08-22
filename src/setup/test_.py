@@ -1,6 +1,6 @@
 from . import initialise
 
-def test_validateSize():
+def test_validate_size():
     assert initialise.validate_size(4) == 4
     assert initialise.validate_size(9) == 9
     assert initialise.validate_size(16) == 16
