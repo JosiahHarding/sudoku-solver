@@ -1,15 +1,106 @@
 from . import initialise
+import constants as c
 
 
+# here we can see that we are testing the boundaries of our code.
+# This is important in my assignment, as I am creating a Sudoku Solver,
+# and must ensure that the program is working with perfect squares.
 def test_validate_size():
-    count = 0
-    assert initialise.validate_size(4) == 4
+    assert initialise.validate_size(4) == 4     # squares
     assert initialise.validate_size(9) == 9
     assert initialise.validate_size(16) == 16
-    assert initialise.validate_size(15) == 9
-    assert initialise.validate_size(16.5) == 16
-    assert initialise.validate_size(-9) == 9
-    assert initialise.validate_size(-15) == 9
+    assert initialise.validate_size(15) == 9    # non-squares
+    assert initialise.validate_size(16.5) == 16 # not a whole number!
+    assert initialise.validate_size(-9) == 9    # negative number
+    assert initialise.validate_size(-15) == 9   # negative non-square
+
+def test_setup_board():
+   board = initialise.setup_board()
+
+   # validate the points
+   assert len(board) == c.SIZE**2
+   for x in range(c.SIZE):
+       for y in range(c.SIZE):
+           assert min(board[(x, y)]) == 1
+           assert max(board[(x, y)]) == c.SIZE
+           assert len(board[(x, y)]) == c.SIZE
+
+def test_get_row():
+    board = initialise.setup_board()
+    slice = initialise.get_row(board, (0,3))
+    assert len(slice.keys()) == c.SIZE
+    for y in range(c.SIZE):
+        assert (0,y) in slice.keys()
+        assert slice[(0,y)] == board[(0,y)]
+
+def test_get_col():
+    board = initialise.setup_board()
+    slice = initialise.get_col(board, (0,3))
+    assert len(slice.keys()) == c.SIZE
+    for x in range(c.SIZE):
+        assert (x,3) in slice.keys()
+        assert slice[(x,3)] == board[(x,3)]
+
+def test_get_sqr_id():
+    assert initialise.get_sqr_id((0,0)) == 0
+    assert initialise.get_sqr_id((2,2)) == 0
+    assert initialise.get_sqr_id((0,3)) == 3
+    assert initialise.get_sqr_id((2,5)) == 3
+    assert initialise.get_sqr_id((0,6)) == 6
+    assert initialise.get_sqr_id((2,8)) == 6
+    assert initialise.get_sqr_id((3,0)) == 1
+    assert initialise.get_sqr_id((5,2)) == 1
+    assert initialise.get_sqr_id((3,3)) == 4
+    assert initialise.get_sqr_id((5,5)) == 4
+    assert initialise.get_sqr_id((3,6)) == 7
+    assert initialise.get_sqr_id((5,8)) == 7
+    assert initialise.get_sqr_id((6,0)) == 2
+    assert initialise.get_sqr_id((8,2)) == 2
+    assert initialise.get_sqr_id((6,3)) == 5
+    assert initialise.get_sqr_id((8,5)) == 5
+    assert initialise.get_sqr_id((6,6)) == 8
+    assert initialise.get_sqr_id((8,8)) == 8
+
+
+def test_get_sqr():
+    board = initialise.setup_board()
+    slice = initialise.get_sqr(board, (0,3))
+    assert len(slice.keys()) == c.SIZE
+    assert (0,3) in slice.keys()
+    assert (1,3) in slice.keys()
+    assert (2,3) in slice.keys()
+    assert (0,4) in slice.keys()
+    assert (1,4) in slice.keys()
+    assert (2,4) in slice.keys()
+    assert (0,5) in slice.keys()
+    assert (1,5) in slice.keys()
+    assert (2,5) in slice.keys()
+    assert slice[(0,3)] == board[(0,3)]
+    assert slice[(0,3)] == board[(1,3)]
+    assert slice[(0,3)] == board[(2,3)]
+    assert slice[(0,3)] == board[(0,4)]
+    assert slice[(0,3)] == board[(1,4)]
+    assert slice[(0,3)] == board[(2,4)]
+    assert slice[(0,3)] == board[(0,5)]
+    assert slice[(0,3)] == board[(1,5)]
+    assert slice[(0,3)] == board[(2,5)]
+
+def test_print_board():
+    board = initialise.setup_board()
+    board[(0,0)] = {1}
+    board[(1,5)] = {4}
+    board[(4,2)] = {8}
+    board[(7,6)] = {9}
+    initialise.print_board(board)
+
+
+
+
+
+
+
+
+
 
 
 def scratch1():
@@ -79,7 +170,7 @@ def scratch1():
 
 
 
-def test_scratch2():
+def _test_scratch2():
     count = 66
     count = count + 1
     assert count == 67
