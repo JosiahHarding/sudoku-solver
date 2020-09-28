@@ -85,15 +85,43 @@ def test_get_sqr():
     assert slice[(0,3)] == board[(1,5)]
     assert slice[(0,3)] == board[(2,5)]
 
-def test_print_board():
+def test_visualise_board():
     board = initialise.setup_board()
     board[(0,0)] = {1}
     board[(1,5)] = {4}
     board[(4,2)] = {8}
     board[(7,6)] = {9}
-    initialise.print_board(board)
+    output = initialise.visualise_board(board)
+    parsed_board = initialise.parse_board(output)
+    assert parsed_board == board
 
+def test_parse_board():
+    sample = " 1 . . | . . . | . . .\n"
+    sample += " . . . | . . . | . . .\n"
+    sample += " . . . | . 8 . | . . .\n"
+    sample += " ---------------------\n"
+    sample += " . . . | . . . | . . .\n"
+    sample += " . . . | . . . | . . .\n"
+    sample += " . 4 . | . . . | . . .\n"
+    sample += " ---------------------\n"
+    sample += " . . . | . . . | . 9 .\n"
+    sample += " . . . | . . . | . . .\n"
+    sample += " . . . | . . . | . . ."
+    board = initialise.parse_board(sample)
+    assert board[(0,0)] == {1}
+    assert board[(1,5)] == {4}
+    assert board[(4,2)] == {8}
+    assert board[(7,6)] == {9}
+    assert board[(5,3)] == set(range(1,c.SIZE + 1))
 
+def test_provided_points():
+    board = initialise.setup_board()
+    board[(0,0)] = {1}
+    board[(1,5)] = {4}
+    board[(4,2)] = {8}
+    board[(7,6)] = {9}
+    provided = initialise.provided_points(board)
+    assert provided == {(0,0),(1,5),(4,2),(7,6)}
 
 
 

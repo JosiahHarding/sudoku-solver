@@ -58,9 +58,8 @@ def get_sqr(board, point):
     return slice
 
 
-def print_board(board):
-    print()
-    print()
+def visualise_board(board):
+    output = ""
     for y in range(c.SIZE):
         line = ""
         if y % c.SIDE == 0 and y != 0:
@@ -72,6 +71,34 @@ def print_board(board):
                 line += " " + str(list(board[x, y])[0])
             else:
                 line += " ."
-        print(line)
+        output += line + "\n"
+    return output
 
-    return None
+
+def parse_board(sample):
+    board = setup_board()
+    lines = sample.strip().split("\n")
+    y = 0
+    for line in lines:
+        if "-" in line:
+            continue
+        x = 0
+        values = line.strip().split()
+        for value in values:
+            if value == "|":
+                continue
+            if value.isnumeric():
+                board[(x,y)] = {int(value)}
+            x += 1
+        y += 1
+    return board
+
+# this funcion will take a board that has had some points set to known values
+# it will return a set of the x,y tuples that refer to the points that have been set
+# for example: {(0,0),(1,5),(4,2),(7,6)}
+def provided_points(board):
+    provided = set()
+    for p in board.keys():
+        if len(board[p]) == 1:
+            provided.add(p)
+    return provided
