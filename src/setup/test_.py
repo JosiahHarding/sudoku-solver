@@ -25,17 +25,17 @@ def test_setup_board():
            assert max(board[(x, y)]) == c.SIZE
            assert len(board[(x, y)]) == c.SIZE
 
-def test_get_row():
+def test_get_col():
     board = initialise.setup_board()
-    slice = initialise.get_row(board, (0,3))
+    slice = initialise.get_col(board, (0,3))
     assert len(slice.keys()) == c.SIZE
     for y in range(c.SIZE):
         assert (0,y) in slice.keys()
         assert slice[(0,y)] == board[(0,y)]
 
-def test_get_col():
+def test_get_row():
     board = initialise.setup_board()
-    slice = initialise.get_col(board, (0,3))
+    slice = initialise.get_row(board, (0,3))
     assert len(slice.keys()) == c.SIZE
     for x in range(c.SIZE):
         assert (x,3) in slice.keys()
@@ -123,8 +123,51 @@ def test_provided_points():
     provided = initialise.provided_points(board)
     assert provided == {(0,0),(1,5),(4,2),(7,6)}
 
+def test_validate_board():
+    board = initialise.setup_board()
+    assert initialise.validate_board(board) is False
+    sample = " 9 2 6 | 8 7 1 | 4 3 5\n"
+    sample += "8 5 1 | 3 4 9 | 2 7 6\n"
+    sample += "4 7 3 | 2 5 6 | 9 8 1\n"
+    sample += "---------------------\n"
+    sample += "6 8 5 | 1 3 2 | 7 4 9\n"
+    sample += "7 3 4 | 5 8 8 | 6 1 2\n"
+    sample += "2 1 9 | 7 6 4 | 3 5 8\n"
+    sample += "---------------------\n"
+    sample += "5 6 8 | 4 2 7 | 1 9 3\n"
+    sample += "3 4 2 | 9 1 5 | 8 6 7\n"
+    sample += "1 9 7 | 6 8 3 | 5 2 4"
+    board = initialise.parse_board(sample)
+    assert initialise.validate_board(board) is False
+    sample = " 9 2 6 | 8 7 1 | 4 3 5\n"
+    sample += "8 5 1 | 3 4 9 | 2 7 6\n"
+    sample += "4 7 3 | 2 5 6 | 9 8 1\n"
+    sample += "---------------------\n"
+    sample += "6 8 5 | 1 3 2 | 7 4 9\n"
+    sample += "7 3 4 | 5 9 8 | 6 1 2\n"
+    sample += "2 1 9 | 7 6 4 | 3 5 8\n"
+    sample += "---------------------\n"
+    sample += "5 6 8 | 4 2 7 | 1 9 3\n"
+    sample += "3 4 2 | 9 1 5 | 8 6 7\n"
+    sample += "1 9 7 | 6 8 3 | 5 2 4"
+    board = initialise.parse_board(sample)
+    assert initialise.validate_board(board) is True
 
+def test_get_message():
+    message = initialise.get_message(True)
+    assert message == "I solved it!"
+    message = initialise.get_message(False)
+    assert message == "Gosh Darnit!"
 
+def test_passing_board():
+    startingDict = {"A": 1, "B": 2, "C": 3}
+    outputDict = initialise.passing_dict(startingDict)
+    assert outputDict == {1: "A", 2: "B", 3: "C"}
+
+def test_dict_manipulation():
+    startingDict = {"A": {1,2,3}, "B": {3,4,5}}
+    outputDict = initialise.dict_manipulation(startingDict)
+    assert outputDict == {1: {"A"}, 2: {"A"}, 3: {"A", "B"}, 4: {"B"}, 5: {"B"}}
 
 
 
@@ -202,3 +245,4 @@ def _test_scratch2():
     count = 66
     count = count + 1
     assert count == 67
+
