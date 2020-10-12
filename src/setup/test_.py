@@ -169,7 +169,45 @@ def test_dict_manipulation():
     outputDict = initialise.dict_manipulation(startingDict)
     assert outputDict == {1: {"A"}, 2: {"A"}, 3: {"A", "B"}, 4: {"B"}, 5: {"B"}}
 
+def test_get_cols_for_sqr():
+    board = initialise.setup_board()
+    point = (0, 0)
+    sqr = initialise.get_sqr(board, point)
+    cols = initialise.get_cols_for_sqr(board, sqr)
+    assert len(cols) == 3
+    xs = set()
+    ys = set()
+    for col in cols:
+        for point in col.keys():
+            xs.add(point[0])
+            ys.add(point[1])
+    assert xs == {0, 1, 2}
+    assert ys == {0, 1, 2, 3, 4, 5, 6, 7, 8}
 
+def test_get_rows_for_sqr():
+    board = initialise.setup_board()
+    point = (0, 0)
+    sqr = initialise.get_sqr(board, point)
+    rows = initialise.get_rows_for_sqr(board, sqr)
+    assert len(rows) == 3
+    xs = set()
+    ys = set()
+    for row in rows:
+        for point in row.keys():
+            xs.add(point[0])
+            ys.add(point[1])
+    assert xs == {0, 1, 2, 3, 4, 5, 6, 7, 8}
+    assert ys == {0, 1, 2}
+
+def test_find_slice_intersection():
+    board = initialise.setup_board()
+    slice1 = initialise.get_sqr(board, (0, 0))
+    slice2 = initialise.get_col(board, (0, 0))
+    slice3 = initialise.get_row(board, (0, 0))
+    intersect = initialise.find_slice_intersection(slice1, slice2)
+    assert intersect == {(0, 0), (0, 1), (0, 2)}
+    intersect = initialise.find_slice_intersection(slice3, slice1)
+    assert intersect == {(1, 0), (2, 0), (0, 0)}
 
 
 

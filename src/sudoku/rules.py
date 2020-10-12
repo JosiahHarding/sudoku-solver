@@ -16,6 +16,13 @@ def run_event_loop(board, events):
         for slice in slices:
             events = events | actual_numbers_rule(slice)
             events = events | multiples_rule(slice)
+        sqr = init.get_sqr(board, p)
+        rows = init.get_rows_for_sqr(board, sqr)
+        cols = init.get_cols_for_sqr(board, sqr)
+        for row in rows:
+            events = events | intersection_rule(sqr, row)
+        for col in cols:
+            events = events | intersection_rule(sqr, col)
     print("processed " + str(count) + " events")
 
 
@@ -112,3 +119,30 @@ def multiples_sort(slice):
         newlist.append(item)
     newlist.sort()
     return newlist
+
+
+def find_intersection_values(intersect, slice):
+    values = set()
+    # get all values in intersection
+    for point in intersect:
+        values = values | slice[point]
+    # remove all values that are found in points not including the intersection.
+    for point in set(slice.keys()) - intersect:
+        values = values - slice[point]
+    return values
+
+
+def intersection_rule(slice1, slice2):
+    updated = set()
+    intersect = init.find_slice_intersection(slice1, slice2)
+    values = find_intersection_values(intersect, slice1)
+    for point in set(slice2.keys()) - intersect:
+        if len(values & slice2[point]) > 0:
+            slice2[point].difference_update(values)
+            updated.add(point)
+    values = find_intersection_values(intersect, slice2)
+    for point in set(slice1.keys()) - intersect:
+        if len(values & slice1[point]) > 0:
+            slice1[point].difference_update(values)
+            updated.add(point)
+    return updated

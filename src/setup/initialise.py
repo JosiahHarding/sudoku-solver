@@ -176,3 +176,34 @@ def dict_manipulation(line):
                 cn[value] = set()
             cn[value].add(key)
     return cn
+# this will collect all columns that intersect the square being tested.
+# returns a list of 3 slices, one for each column.
+def get_cols_for_sqr(board, sqr):
+    cols = []
+    for x, y in sqr.keys():
+        col = get_col_for_id(board, x)
+        if col not in cols:
+            cols.append(col)
+    return cols
+
+
+def get_rows_for_sqr(board, sqr):
+    rows = []
+    for x, y in sqr.keys():
+        row = get_row_for_id(board, y)
+        if row not in rows:
+            rows.append(row)
+    return rows
+
+
+def find_slice_intersection(slice1, slice2):
+    discard = set()
+    intersect = set()
+    for point in slice1.keys():
+        discard.add(point)
+    for point in slice2.keys():
+        if point in discard:
+            intersect.add(point)
+    return intersect
+
+

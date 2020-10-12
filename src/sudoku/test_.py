@@ -76,6 +76,33 @@ def test_hidden_multiples_rule():
     assert board[(0, 8)] == {1, 2}
 
 
+def test_find_intersection_values():
+    board = initialise.setup_board()
+    slice = initialise.get_col(board, (0, 0))
+    for y in range(3, 9):
+        slice[(0, y)] = set(range(1,7))
+
+    slice[(0, 0)] = {1, 2, 8}
+    slice[(0, 1)] = {5, 6, 7}
+    slice[(0, 2)] = {3, 6, 9}
+
+    intersect = {(0, 0), (0, 1), (0, 2)}
+    values = rules.find_intersection_values(intersect, slice)
+    assert values == {7, 8, 9}
 
 
-
+def test_intersection_rule():
+    board =  initialise.setup_board()
+    s1 = initialise.get_sqr(board, (0, 0))
+    s2 = initialise.get_col(board, (0, 0))
+    intersection = {(0, 0), (0, 1), (0, 2)}
+    for point in set(s1.keys()) - intersection:
+        s1[point].remove(1)
+    for point in set(s2.keys()) - intersection:
+        s2[point].remove(2)
+    updated = rules.intersection_rule(s1, s2)
+    for point in set(s1.keys()) - intersection:
+        assert 2 not in s1[point]
+    for point in set(s2.keys()) - intersection:
+        assert 1 not in s2[point]
+    assert updated == (set(s1.keys()) | set(s2.keys())) - intersection
