@@ -3,7 +3,7 @@ import sudoku.rules as rules
 
 #
 def main():
-    board = init.parse_board(hard[0])
+    board = init.parse_board(good_grief[0])
     provided = init.provided_points(board)
     rules.run_event_loop(board, provided)
     print()
@@ -17,6 +17,7 @@ easy = []
 medium = []
 hard = []
 expert = []
+good_grief = []
 
 # sample.append("")
 # sample[0] += " . . . | . . . | . . .\n"
@@ -30,20 +31,6 @@ expert = []
 # sample[0] += " . . . | . . . | . . .\n"
 # sample[0] += " . . . | . . . | . . .\n"
 # sample[0] += " . . . | . . . | . . ."
-
-# hard
-hard.append("")
-hard[0] += " 6 4 . | . . 1 | 7 . 2\n"
-hard[0] += " 8 . 7 | . . 9 | . 1 .\n"
-hard[0] += " . . 1 | . 7 . | . . 9\n"
-hard[0] += " ---------------------\n"
-hard[0] += " . . 6 | . 5 7 | . . .\n"
-hard[0] += " 2 . . | . . . | . . .\n"
-hard[0] += " . 5 . | 2 8 . | . . .\n"
-hard[0] += " ---------------------\n"
-hard[0] += " . 6 . | 4 . 5 | . . 3\n"
-hard[0] += " . 8 . | . 6 . | . . 4\n"
-hard[0] += " . . . | . . . | 1 . 5"
 
 
 # easy
@@ -74,20 +61,47 @@ medium[0] += " . . 1 | 9 . 6 | . . .\n"
 medium[0] += " 4 3 . | . 5 . | . 6 .\n"
 medium[0] += " . 2 . | . 7 . | . 1 ."
 
+# hard
+hard.append("")
+hard[0] += " 6 4 . | . . 1 | 7 . 2\n"
+hard[0] += " 8 . 7 | . . 9 | . 1 .\n"
+hard[0] += " . . 1 | . 7 . | . . 9\n"
+hard[0] += " ---------------------\n"
+hard[0] += " . . 6 | . 5 7 | . . .\n"
+hard[0] += " 2 . . | . . . | . . .\n"
+hard[0] += " . 5 . | 2 8 . | . . .\n"
+hard[0] += " ---------------------\n"
+hard[0] += " . 6 . | 4 . 5 | . . 3\n"
+hard[0] += " . 8 . | . 6 . | . . 4\n"
+hard[0] += " . . . | . . . | 1 . 5"
 
 # expert
 expert.append("")
-expert[0] += " . . 9 | . 3 4 | . 6 .\n"
-expert[0] += " . . . | . 8 . | . . .\n"
-expert[0] += " 7 . . | . 1 . | . . .\n"
+expert[0] += " . . 9 | . 4 7 | . . .\n"
+expert[0] += " . . . | . . . | 1 . 6\n"
+expert[0] += " . 8 . | . 2 . | . . .\n"
 expert[0] += " ---------------------\n"
-expert[0] += " . . 3 | . . . | . . .\n"
-expert[0] += " . 2 . | 5 . . | 9 1 .\n"
-expert[0] += " 9 . . | . . . | . . 7\n"
+expert[0] += " 8 . 1 | . . 3 | . . .\n"
+expert[0] += " . 7 3 | . . . | . . .\n"
+expert[0] += " . . . | . . . | . 5 4\n"
 expert[0] += " ---------------------\n"
-expert[0] += " . . 6 | . . 3 | 8 . 1\n"
-expert[0] += " 3 . . | . . . | . 2 .\n"
-expert[0] += " . . . | 9 . . | . 4 ."
+expert[0] += " . . . | 2 . . | . . 1\n"
+expert[0] += " 3 . . | . . 9 | . 7 .\n"
+expert[0] += " . 9 . | 8 . 6 | . 4 ."
+
+# expert
+good_grief.append("")
+good_grief[0] += " . . . | 1 . . | 6 . 5\n"
+good_grief[0] += " . . . | . . 6 | . . .\n"
+good_grief[0] += " . . 2 | 5 . 9 | . 3 .\n"
+good_grief[0] += " ---------------------\n"
+good_grief[0] += " 9 . . | . 7 . | . 6 .\n"
+good_grief[0] += " 2 . . | . 3 . | 1 . .\n"
+good_grief[0] += " . . . | . . . | 3 . 2\n"
+good_grief[0] += " ---------------------\n"
+good_grief[0] += " 7 . . | . . . | . . .\n"
+good_grief[0] += " . 4 . | . . . | . 2 .\n"
+good_grief[0] += " . . 1 | . 6 5 | 4 . ."
 
 if __name__ == "__main__":
     main()
