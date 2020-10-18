@@ -1,4 +1,4 @@
-import setup.initialise as initialise
+import setup.board as initialise
 from . import rules
 
 

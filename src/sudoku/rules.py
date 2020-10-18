@@ -1,6 +1,6 @@
 from typing import List, Any, Tuple
 
-import setup.initialise as init
+import setup.board as init
 
 
 def run_event_loop(board, events):
