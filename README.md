@@ -16,7 +16,11 @@ If neither of these work, you will need to validate your python installation. Pl
 When you extract the zip file you should see `solver.py` in the directory next to this readme. The program is now installed.
 
 ### Running the program
-Open up a terminal window and navigate to the location of the `solver.py` file. From here simply execute the command:
+Open up a terminal window and navigate to the location of the `solver.py` file. This can be accessed with the following code:
+
+`cd ~/projects/scratch/sudoku-solver`
+
+From here simply execute the command:
 
 `python3 solver.py`
 
