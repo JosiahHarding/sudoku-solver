@@ -36,7 +36,7 @@ You can use one of these puzzles to try the program without having a sudoku of y
 
 Once you've given your sudoku a name or used one of the ones above, the solver will try to find that file on the file system. If it can't it will create a new file called `<your name>.txt` and the program will ask you to enter your sudoku starting position into the file like this:
 
-> I have created a file called <your name>.txt on the filesytem. 
+> I have created a file called `<your name>.txt` on the filesytem. 
 > Please enter your sudoku in this file and press enter.
 
 Open the file in your favourite text editor and enter your sudoku starting position numbers by overwriting the `.` characters in the correct locations with a number 1-9. When you are done save the file and come back to the solver program screen to hit enter per the instructions. The program will print the starting position out to the screen for you to confirm:
