@@ -1,5 +1,3 @@
-from typing import List, Any, Tuple
-
 import setup.board as init
 
 
@@ -56,7 +54,7 @@ def actual_numbers_rule(slice):
 def set_ones(slice):
     ones = {}  # creating a new dict
     for point, possible in slice.items():  # for each point in the items of slice:
-        if len(possible) == 1:  # If the length of the set ‘possible’ is equal to 1:
+        if len(possible) == 1:  # If the length of the set 'possible' is equal to 1:
             ones[point] = list(possible)[0]  # a new point in ones is equal to the number in possible
     return ones  # return the slices
 
