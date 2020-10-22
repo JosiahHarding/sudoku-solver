@@ -18,7 +18,7 @@ When you extract the zip file you should see `solver.py` in the directory next t
 ### Running the program
 Open up a terminal window and navigate to the location of the `solver.py` file. This can be accessed with the following code:
 
-`cd ~/projects/scratch/sudoku-solver`
+`cd ~/downloads/sudoku-solver`
 
 From here simply execute the command:
 
